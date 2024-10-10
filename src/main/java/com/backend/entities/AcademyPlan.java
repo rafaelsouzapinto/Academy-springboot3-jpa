@@ -1,6 +1,5 @@
 package com.backend.entities;
 
-import java.time.Instant;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -10,22 +9,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_client")
-public class Client {
+@Table(name = "tb_academy_plan")
+public class AcademyPlan {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private Instant accessionDate;
-	private String phoneNumber;
+	private String description;
+	private Double price;
+	private Integer durationDays;
 	
-	public Client() {
+	public AcademyPlan() {
 	}
-	public Client(Long id, String name, Instant accessionDate, String phoneNumber) {
+	public AcademyPlan(Long id, String name, String description, Double price, Integer durationDays) {
+		super();
 		this.id = id;
 		this.name = name;
-		this.accessionDate = accessionDate;
-		this.phoneNumber = phoneNumber;
+		this.description = description;
+		this.price = price;
+		this.durationDays = durationDays;
 	}
 	
 	public Long getId() {
@@ -40,19 +42,24 @@ public class Client {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Instant getAccessionDate() {
-		return accessionDate;
+	public String getDescription() {
+		return description;
 	}
-	public void setAccessionDate(Instant accessionDate) {
-		this.accessionDate = accessionDate;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public Double getPrice() {
+		return price;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
-	
+	public Integer getDurationDays() {
+		return durationDays;
+	}
+	public void setDurationDays(Integer durationDays) {
+		this.durationDays = durationDays;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -66,7 +73,7 @@ public class Client {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Client other = (Client) obj;
+		AcademyPlan other = (AcademyPlan) obj;
 		return Objects.equals(id, other.id);
 	}
 }
