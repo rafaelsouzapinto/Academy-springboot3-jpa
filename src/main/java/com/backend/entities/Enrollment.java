@@ -10,22 +10,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_client")
-public class Client {
+@Table(name = "tb_enrollment")
+public class Enrollment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private Instant accessionDate;
-	private String phoneNumber;
+	private Instant start;
+	private Instant end;
+	private String status;
 	
-	public Client() {
+	public Enrollment() {
 	}
-	public Client(Long id, String name, Instant accessionDate, String phoneNumber) {
+	public Enrollment(Long id, Instant start, Instant end, String status) {
+		super();
 		this.id = id;
-		this.name = name;
-		this.accessionDate = accessionDate;
-		this.phoneNumber = phoneNumber;
+		this.start = start;
+		this.end = end;
+		this.status = status;
 	}
 	
 	public Long getId() {
@@ -34,23 +35,23 @@ public class Client {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public Instant getStart() {
+		return start;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setStart(Instant start) {
+		this.start = start;
 	}
-	public Instant getAccessionDate() {
-		return accessionDate;
+	public Instant getEnd() {
+		return end;
 	}
-	public void setAccessionDate(Instant accessionDate) {
-		this.accessionDate = accessionDate;
+	public void setEnd(Instant end) {
+		this.end = end;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getStatus() {
+		return status;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	@Override
@@ -65,7 +66,7 @@ public class Client {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Client other = (Client) obj;
+		Enrollment other = (Enrollment) obj;
 		return Objects.equals(id, other.id);
 	}
 }

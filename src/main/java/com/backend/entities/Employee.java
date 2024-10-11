@@ -9,25 +9,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_academy_plan")
-public class AcademyPlan {
+@Table(name = "tb_employee")
+public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String description;
-	private Double price;
-	private Integer durationDays;
 	
-	public AcademyPlan() {
+	public Employee() {
 	}
-	public AcademyPlan(Long id, String name, String description, Double price, Integer durationDays) {
+	public Employee(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.durationDays = durationDays;
 	}
 	
 	public Long getId() {
@@ -42,25 +36,7 @@ public class AcademyPlan {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public Double getPrice() {
-		return price;
-	}
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-	public Integer getDurationDays() {
-		return durationDays;
-	}
-	public void setDurationDays(Integer durationDays) {
-		this.durationDays = durationDays;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -73,7 +49,7 @@ public class AcademyPlan {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AcademyPlan other = (AcademyPlan) obj;
+		Employee other = (Employee) obj;
 		return Objects.equals(id, other.id);
 	}
 }
