@@ -3,10 +3,12 @@ package com.backend.entities;
 import java.time.Instant;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +20,9 @@ public class Payment {
 	private Instant paymentDate;
 	private Double paymentValue;
 	private Integer paymentStatus;
+	
+	@OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
+	private Enrollment enrollment;
 	
 	public Payment() {
 	}
