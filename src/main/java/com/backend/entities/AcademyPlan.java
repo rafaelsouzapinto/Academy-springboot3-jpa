@@ -1,11 +1,16 @@
 package com.backend.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +23,10 @@ public class AcademyPlan {
 	private String description;
 	private Double price;
 	private Integer durationDays;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "academyPlan")
+	private List<Enrollment> list = new ArrayList<>();
 	
 	public AcademyPlan() {
 	}
@@ -59,6 +68,9 @@ public class AcademyPlan {
 	}
 	public void setDurationDays(Integer durationDays) {
 		this.durationDays = durationDays;
+	}
+	public List<Enrollment> getList() {
+		return list;
 	}
 
 	@Override

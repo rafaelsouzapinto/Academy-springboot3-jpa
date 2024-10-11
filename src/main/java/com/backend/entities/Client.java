@@ -1,12 +1,17 @@
 package com.backend.entities;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +23,10 @@ public class Client {
 	private String name;
 	private Instant accessionDate;
 	private String phoneNumber;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "client")
+	private List<Enrollment> list = new ArrayList<>();
 	
 	public Client() {
 	}
@@ -52,7 +61,10 @@ public class Client {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
+	public List<Enrollment> getList() {
+		return list;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
