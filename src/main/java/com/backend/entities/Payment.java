@@ -3,6 +3,8 @@ package com.backend.entities;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.backend.entities.enums.PaymentStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,12 +29,11 @@ public class Payment {
 	
 	public Payment() {
 	}
-	public Payment(Long id, Instant paymentDate, Double paymentValue, Integer paymentStatus, Enrollment enrollment) {
-		super();
+	public Payment(Long id, Instant paymentDate, Double paymentValue, PaymentStatus paymentStatus, Enrollment enrollment) {
 		this.id = id;
 		this.paymentDate = paymentDate;
 		this.paymentValue = paymentValue;
-		this.paymentStatus = paymentStatus;
+		setPaymentStatus(paymentStatus);
 		this.enrollment = enrollment;
 	}
 	
@@ -54,11 +55,13 @@ public class Payment {
 	public void setPaymentValue(Double paymentValue) {
 		this.paymentValue = paymentValue;
 	}
-	public Integer getPaymentStatus() {
-		return paymentStatus;
+	public PaymentStatus getPaymentStatus() {
+		return PaymentStatus.valueOf(paymentStatus);
 	}
-	public void setPaymentStatus(Integer paymentStatus) {
-		this.paymentStatus = paymentStatus;
+	public void setPaymentStatus(PaymentStatus paymentStatus) {
+		if (paymentStatus != null) {
+			this.paymentStatus = paymentStatus.getCode();
+		}
 	}
 	public Enrollment getEnrollment() {
 		return enrollment;
