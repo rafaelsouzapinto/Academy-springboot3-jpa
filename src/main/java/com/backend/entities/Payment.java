@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -29,15 +31,20 @@ public class Payment {
 	@MapsId
 	private Enrollment enrollment;
 	
+	@ManyToOne
+	@JoinColumn(name = "employee_id")
+	private Employee employee;
+	
 	public Payment() {
 	}
-	public Payment(Long id, Instant paymentDate, Double paymentValue, PaymentStatus paymentStatus, PaymentMethod paymentMethod, Enrollment enrollment) {
+	public Payment(Long id, Instant paymentDate, Double paymentValue, PaymentStatus paymentStatus, PaymentMethod paymentMethod, Enrollment enrollment, Employee employee) {
 		this.id = id;
 		this.paymentDate = paymentDate;
 		this.paymentValue = paymentValue;
 		setPaymentStatus(paymentStatus);
 		setPaymentMethod(paymentMethod);
 		this.enrollment = enrollment;
+		this.employee = employee;
 	}
 	
 	public Long getId() {
@@ -79,6 +86,12 @@ public class Payment {
 	}
 	public void setEnrollment(Enrollment enrollment) {
 		this.enrollment = enrollment;
+	}
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	
 	@Override
