@@ -3,6 +3,7 @@ package com.backend.entities;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.backend.entities.enums.PaymentMethod;
 import com.backend.entities.enums.PaymentStatus;
 
 import jakarta.persistence.Entity;
@@ -22,6 +23,7 @@ public class Payment {
 	private Instant paymentDate;
 	private Double paymentValue;
 	private Integer paymentStatus;
+	private Integer paymentMethod;
 	
 	@OneToOne
 	@MapsId
@@ -29,11 +31,12 @@ public class Payment {
 	
 	public Payment() {
 	}
-	public Payment(Long id, Instant paymentDate, Double paymentValue, PaymentStatus paymentStatus, Enrollment enrollment) {
+	public Payment(Long id, Instant paymentDate, Double paymentValue, PaymentStatus paymentStatus, PaymentMethod paymentMethod, Enrollment enrollment) {
 		this.id = id;
 		this.paymentDate = paymentDate;
 		this.paymentValue = paymentValue;
 		setPaymentStatus(paymentStatus);
+		setPaymentMethod(paymentMethod);
 		this.enrollment = enrollment;
 	}
 	
@@ -61,6 +64,14 @@ public class Payment {
 	public void setPaymentStatus(PaymentStatus paymentStatus) {
 		if (paymentStatus != null) {
 			this.paymentStatus = paymentStatus.getCode();
+		}
+	}
+	public PaymentMethod getPaymentMethod() {
+		return PaymentMethod.valueOf(paymentMethod);
+	}
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		if (paymentMethod != null) {
+			this.paymentMethod = paymentMethod.getCode();
 		}
 	}
 	public Enrollment getEnrollment() {

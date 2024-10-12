@@ -3,6 +3,8 @@ package com.backend.entities;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.backend.entities.enums.EnrollmentStatus;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +23,7 @@ public class Enrollment {
 	private Long id;
 	private Instant start;
 	private Instant end;
-	private String status;
+	private Integer enrollmentStatus;
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
@@ -36,12 +38,12 @@ public class Enrollment {
 
 	public Enrollment() {
 	}
-	public Enrollment(Long id, Instant start, Instant end, String status, Client client, AcademyPlan academyPlan) {
+	public Enrollment(Long id, Instant start, Instant end, EnrollmentStatus enrollmentStatus, Client client, AcademyPlan academyPlan) {
 		super();
 		this.id = id;
 		this.start = start;
 		this.end = end;
-		this.status = status;
+		setEnrollmentStatus(enrollmentStatus);
 		this.client = client;
 		this.academyPlan = academyPlan;
 	}
@@ -64,11 +66,13 @@ public class Enrollment {
 	public void setEnd(Instant end) {
 		this.end = end;
 	}
-	public String getStatus() {
-		return status;
+	public EnrollmentStatus getEnrollmentStatus() {
+		return EnrollmentStatus.valueOf(enrollmentStatus);
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setEnrollmentStatus(EnrollmentStatus enrollmentStatus) {
+		if (enrollmentStatus != null) {
+			this.enrollmentStatus = enrollmentStatus.getCode();
+		}
 	}
 	public Client getClient() {
 		return client;
