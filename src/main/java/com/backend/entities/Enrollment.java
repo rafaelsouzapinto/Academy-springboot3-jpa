@@ -3,15 +3,13 @@ package com.backend.entities;
 import java.time.Instant;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -33,11 +31,9 @@ public class Enrollment {
 	@JoinColumn(name = "academy_plan_id")
 	private AcademyPlan academyPlan;
 	
-	@JsonIgnore
-	@OneToOne
-	@MapsId
+	@OneToOne(mappedBy = "enrollment", cascade = CascadeType.ALL)
 	private Payment payment;
-	
+
 	public Enrollment() {
 	}
 	public Enrollment(Long id, Instant start, Instant end, String status, Client client, AcademyPlan academyPlan) {

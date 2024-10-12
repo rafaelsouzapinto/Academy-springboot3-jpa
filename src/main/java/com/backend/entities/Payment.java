@@ -3,11 +3,11 @@ package com.backend.entities;
 import java.time.Instant;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -21,17 +21,19 @@ public class Payment {
 	private Double paymentValue;
 	private Integer paymentStatus;
 	
-	@OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
+	@OneToOne
+	@MapsId
 	private Enrollment enrollment;
 	
 	public Payment() {
 	}
-	public Payment(Long id, Instant paymentDate, Double paymentValue, Integer paymentStatus) {
+	public Payment(Long id, Instant paymentDate, Double paymentValue, Integer paymentStatus, Enrollment enrollment) {
 		super();
 		this.id = id;
 		this.paymentDate = paymentDate;
 		this.paymentValue = paymentValue;
 		this.paymentStatus = paymentStatus;
+		this.enrollment = enrollment;
 	}
 	
 	public Long getId() {
@@ -57,6 +59,12 @@ public class Payment {
 	}
 	public void setPaymentStatus(Integer paymentStatus) {
 		this.paymentStatus = paymentStatus;
+	}
+	public Enrollment getEnrollment() {
+		return enrollment;
+	}
+	public void setEnrollment(Enrollment enrollment) {
+		this.enrollment = enrollment;
 	}
 	
 	@Override
