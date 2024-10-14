@@ -24,4 +24,8 @@ public class ClientService {
 		return obj.get();
 	}
 	
+	public Client insert(Client obj) {
+		return repository.save(obj);
+	}
+	
 }
