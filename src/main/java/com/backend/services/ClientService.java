@@ -28,4 +28,12 @@ public class ClientService {
 		return repository.save(obj);
 	}
 	
+	public Client update(Client obj, Long id) {
+		Client client = findById(id);
+		client.setAccessionDate(obj.getAccessionDate());
+		client.setName(obj.getName());
+		client.setPhoneNumber(obj.getPhoneNumber());
+		return repository.save(client);
+	}
+	
 }
