@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import com.backend.entities.Client;
 import com.backend.services.ClientService;
 
 @RestController
-@RequestMapping(value = "/clients")
+@RequestMapping("/clients")
 public class ClientController {
 
 	@Autowired
@@ -28,7 +29,7 @@ public class ClientController {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@GetMapping(value="{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Client> findById(@PathVariable Long id) {
 		Client obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
@@ -40,9 +41,15 @@ public class ClientController {
 		return ResponseEntity.ok().body(client);
 	}
 	
-	@PutMapping(value="{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Client> update(@RequestBody Client obj, @PathVariable Long id) {
 		Client client = service.update(obj, id);
 		return ResponseEntity.ok().body(client);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 }

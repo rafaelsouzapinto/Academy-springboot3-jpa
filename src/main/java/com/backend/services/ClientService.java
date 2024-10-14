@@ -36,4 +36,7 @@ public class ClientService {
 		return repository.save(client);
 	}
 	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 }
